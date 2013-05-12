@@ -29,7 +29,7 @@ strategy requires a `setup` callback and a `resync` callback.
 
 The `setup` callback accepts a previously authenticated `user` and calls `done`
 providing a `key` and `counter` used to verify the HOTP value.  Authentication
-fails value is not verified.
+fails if the value is not verified.
 
 After successful authentication, the `resync` callback is invoked to synchronize
 the counter values on the server and on the token.
