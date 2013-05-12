@@ -94,7 +94,7 @@ passport.use(new HotpStrategy(
     
     saveKeyForUserId(user.id, { key: key, counter: counter }, function(err) {
       if (err) { return done(err); }
-      return done(null, { secondFactor: 'hotp' });
+      return done(null);
     });
   }
 ));
@@ -198,6 +198,7 @@ app.get('/login-otp', loggedin.ensureLoggedIn(),
 app.post('/login-otp', 
   passport.authenticate('hotp', { failureRedirect: '/login-otp', failureFlash: true }),
   function(req, res) {
+    req.session.secondFactor = 'hotp';
     res.redirect('/');
   });
 
