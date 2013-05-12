@@ -1,6 +1,6 @@
 {
   "name": "passport-hotp",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "HOTP authentication strategy for Passport.",
   "keywords": ["passport", "otp", "oath", "hotp", "auth", "authn", "authentication"],
   "repository": {
