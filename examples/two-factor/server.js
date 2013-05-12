@@ -82,9 +82,19 @@ passport.use(new LocalStrategy(function(username, password, done) {
 
 passport.use(new HotpStrategy(
   function(user, done) {
+    // setup function, supply key and counter to done callback
     findKeyForUserId(user.id, function(err, obj) {
       if (err) { return done(err); }
       return done(null, obj.key, obj.counter);
+    });
+  },
+  function(user, key, counter, delta, done) {
+    // resync function, save new counter value
+    //console.log('resync: ' + key + ' ' + counter);
+    
+    saveKeyForUserId(user.id, { key: key, counter: counter }, function(err) {
+      if (err) { return done(err); }
+      return done(null, { secondFactor: 'hotp' });
     });
   }
 ));
